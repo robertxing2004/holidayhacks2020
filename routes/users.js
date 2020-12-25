@@ -8,7 +8,7 @@ var database = require('../database');
 // Users profile page
 router.get('/', function(req, res, next) {
   if (!req.session.username) res.redirect('/users/login');
-  else res.send('profile page');
+  else res.render('profile');
 });
 
 // Users login page
