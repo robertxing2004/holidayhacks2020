@@ -5,13 +5,13 @@ var router = express.Router();
 
 // Users profile page
 router.get('/', function(req, res, next) {
-  res.send('profile page');
+  if (!req.session.username) res.redirect('/users/login');
+  else res.send('profile page');
 });
 
 // Users login page
 router.get('/login', function(req, res, next) {
-  res.redirect(`https://github.com/login/oauth/authorize?client_id=${appinfo.clientID}&scope=user`);
-
+  res.redirect(`https://github.com/login/oauth/authorize?client_id=${properties.clientID}&scope=user`);
 });
 
 // confirm login page (github callback)
@@ -24,16 +24,20 @@ router.get('/confirmlogin', function(req, res, next) {
     code: req.query.code
   };
   const opts = { headers: { accept: 'application/json' } };
+  var data;
 
   axios.post('https://github.com/login/oauth/access_token', body, opts).
-    then(res => {
-      var token = res.data.access_token;
-
-      console.log(`Token: ${token}\n`);
-      var data = axios.get('https://api.github.com/user', {headers: {authorization: `token ${token}`}}).data;
-
-      console.log(`\n\n\nData:${data}`);
-      //client.execute()//insert user info into database
+    then(res => res.data.access_token).
+    then(async token => {
+      return (await axios.get('https://api.github.com/user', {headers: {authorization: `token ${token}`}})).data;
+    }).
+    then(data => {
+      //add user info into database
+      req.session.username = data.login;
+      console.log(req.session.username);
+    }).
+    then(() => {
+      res.redirect('/users');
     }).
     catch(err => res.status(500).json({ message: err.message }));
 })
