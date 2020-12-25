@@ -1,3 +1,5 @@
+import Radar from 'radar-sdk-js';
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -37,5 +39,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// radar functionality
+Radar.initialize(publishableKey);
+// user info
+Radar.setUserId(userId);
+Radar.setMetadata(metadata); // JSON object with up to 16 keys and of type string, boolean, or number
+Radar.setDescription(description); // optional, desc is a string
+
+
 
 module.exports = app;
