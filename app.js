@@ -47,7 +47,12 @@ Radar.setUserId(userId); // stable unique user ID
 Radar.setMetadata(metadata); // OPTIONAL, JSON object, up to 16 keys and of type string, boolean, or number
 Radar.setDescription(description); // OPTIONAL, desc is a string
 
-
-
+// track
+Radar.trackOnce(function(err, result) {
+  if (!err) {
+    var loc;
+    loc = result;
+  }
+});
 
 module.exports = app;
