@@ -9,7 +9,7 @@ Radar.setMetadata(metadata); // OPTIONAL, JSON object, up to 16 keys and of type
 
 // track
 Radar.trackOnce(function(err, loc) {
-    if (!err) {
-      return loc;
-    }
-  });
+  if (!err) {
+    return loc;
+  }
+});
