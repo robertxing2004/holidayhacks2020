@@ -7,7 +7,6 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var properties = require('./properties');
-var radar = require('./radar');
 
 var app = express();
 
