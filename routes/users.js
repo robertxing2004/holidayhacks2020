@@ -1,24 +1,38 @@
 var express = require('express');
+var axios = require('axios');
+var properties = require('../properties');
 var router = express.Router();
 
-// Users main page
+// Users profile page
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.send('profile page');
 });
 
 // Users login page
 router.get('/login', function(req, res, next) {
+  res.redirect(`https://github.com/login/oauth/authorize?client_id=${appinfo.clientID}`);
 
 });
 
-//Users github callback page
+// confirm login page (github callback)
 router.get('/confirmlogin', function(req, res, next) {
+  var client = req.app.locals.client;
 
-});
+  const body = {
+    client_id: properties.clientID,
+    client_secret: properties.clientSecret,
+    code: req.query.code
+  };
 
-//Users profile page
-router.get('/profile', function(req, res, next) {
+  const opts = { headers: { accept: 'application/json' } };
 
-});
+  axios.post(`https://github.com/login/oauth/access_token`, body, opts).
+    then(res => {
+      var token = res.data.access_token;
+
+      
+    }).
+    catch(err => res.status(500).json({ message: err.message }));
+})
 
 module.exports = router;
