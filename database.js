@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 //set up mongoose connection
-var mongoDB = 'mongodb://127.0.0.1/database';
+var mongoDB = 'mongodb://98.110.89.102/database';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //get default connection
