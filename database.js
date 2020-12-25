@@ -1,11 +1,11 @@
 //import mongoose module
 var mongoose = require('mongoose');
+var properties = require('./properties');
 
 //set up mongoose connection
-var mongoDB = 'mongodb://98.110.89.102/database';
+var mongoDB = `mongodb+srv://hackathon:${properties.databasePassword}@hackathon.lujvz.mongodb.net/hackathon?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 
-//get default connection
 var db = mongoose.connection;
 
 //bind connection to error event for notification of connection errors
@@ -15,27 +15,23 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var Schema = mongoose.Schema;
 
 //constructor method
-var users = new Schema({
-   user_id:  Schema.Types.ObjectId,
-   user_email: String,
+var userSchema = new Schema({
+   id:  Schema.Types.ObjectId, //github login username
+   email: String,
    username: String,
-   user_points: Number,
-   user_githubtoken: String
+   points: Number,
 });
 
-var requests = new Schema({
-    user_id: Number,
+var requestSchema = new Schema({
+    id: String,
     description: String,
-    maxLimit: Number
+    maxCost: Number
 });
 
-var users = mongoose.model('users', users);
-var requests = mongoose.model('requests', requests);
+var users = db.model('users', userSchema);
+var requests = db.model('requests', requestSchema);
 
-var test = new users({ username: 'test' });
-
-test.save(function (err) {
-  if (err) return handleError(err);
-});
-
-module.exports = users, requests;
+module.exports = {
+  users: users,
+  requests: requests
+};

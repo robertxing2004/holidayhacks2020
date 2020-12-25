@@ -1,7 +1,9 @@
 var express = require('express');
-var axios = require('axios');
-var properties = require('../properties');
 var router = express.Router();
+var axios = require('axios');
+
+var properties = require('../properties');
+var database = require('../database');
 
 // Users profile page
 router.get('/', function(req, res, next) {
@@ -16,7 +18,6 @@ router.get('/login', function(req, res, next) {
 
 // confirm login page (github callback)
 router.get('/confirmlogin', function(req, res, next) {
-  //var client = req.app.locals.client;
 
   const body = {
     client_id: properties.clientID,
@@ -32,7 +33,13 @@ router.get('/confirmlogin', function(req, res, next) {
       return (await axios.get('https://api.github.com/user', {headers: {authorization: `token ${token}`}})).data;
     }).
     then(data => {
-      //add user info into database
+      let user = new database.users({
+        id: data.login,
+        email: data.email,
+        username: data.name,
+        points: 0
+      });
+      user.save(err => {throw err;});
       req.session.username = data.login;
       console.log(req.session.username);
     }).
