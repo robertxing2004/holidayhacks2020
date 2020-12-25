@@ -1,4 +1,4 @@
-import Radar from 'radar-sdk-js';
+var Radar = require('radar-sdk-js');
 
 var createError = require('http-errors');
 var express = require('express');
@@ -41,11 +41,12 @@ app.use(function(err, req, res, next) {
 });
 
 // radar functionality
-Radar.initialize(publishableKey);
+Radar.initialize(prj_test_pk_e70c7e7b314f15ad6c4ea2d7aae98064afa8bfd5);
 // identify user
 Radar.setUserId(userId); // stable unique user ID
 Radar.setMetadata(metadata); // OPTIONAL, JSON object, up to 16 keys and of type string, boolean, or number
 Radar.setDescription(description); // OPTIONAL, desc is a string
+
 
 
 
