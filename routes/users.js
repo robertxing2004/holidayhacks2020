@@ -39,7 +39,7 @@ router.get('/confirmlogin', function(req, res, next) {
         username: data.name,
         points: 0
       });
-      user.save(err => {throw err;});
+      user.save(err => {console.log(`\n\n\n***\n${err}\n***\n\n\n`);});
       req.session.username = data.login;
       console.log(req.session.username);
     }).

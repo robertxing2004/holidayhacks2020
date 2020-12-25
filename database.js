@@ -16,7 +16,7 @@ var Schema = mongoose.Schema;
 
 //constructor method
 var userSchema = new Schema({
-   id:  Schema.Types.ObjectId, //github login username
+   id:  String, //github login username
    email: String,
    username: String,
    points: Number,
