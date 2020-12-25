@@ -31,3 +31,5 @@ var requests = new Schema({
 
 var users = mongoose.model('users', users);
 var requests = mongoose.model('requests', requests);
+
+module.exports = users, requests;
