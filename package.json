@@ -12,6 +12,7 @@
     "express": "~4.16.1",
     "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
+    "mongoose": "^5.11.8",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11",
     "radar-sdk-js": "^3.0.1"

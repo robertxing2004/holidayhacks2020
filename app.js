@@ -42,11 +42,12 @@ app.use(function(err, req, res, next) {
 });
 
 // radar functionality
-//Radar.initialize(publishableKey);
-// user info
-//Radar.setUserId(userId);
-//Radar.setMetadata(metadata); // JSON object with up to 16 keys and of type string, boolean, or number
-//Radar.setDescription(description); // optional, desc is a string
+Radar.initialize(prj_test_pk_e70c7e7b314f15ad6c4ea2d7aae98064afa8bfd5);
+// identify user
+Radar.setUserId(userId); // stable unique user ID
+Radar.setMetadata(metadata); // OPTIONAL, JSON object, up to 16 keys and of type string, boolean, or number
+Radar.setDescription(description); // OPTIONAL, desc is a string
+
 
 
 
