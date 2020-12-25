@@ -32,4 +32,10 @@ var requests = new Schema({
 var users = mongoose.model('users', users);
 var requests = mongoose.model('requests', requests);
 
+var test = new users({ username: 'test' });
+
+test.save(function (err) {
+  if (err) return handleError(err);
+});
+
 module.exports = users, requests;
