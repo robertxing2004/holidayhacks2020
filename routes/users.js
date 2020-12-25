@@ -8,7 +8,7 @@ var database = require('../database');
 // Users profile page
 router.get('/', function(req, res, next) {
   if (!req.session.username) res.redirect('/users/login');
-  else res.render('profile');
+  else res.render('dashboard');
 });
 
 // Users login page
@@ -48,5 +48,17 @@ router.get('/confirmlogin', function(req, res, next) {
     }).
     catch(err => res.status(500).json({ message: err.message }));
 })
+
+// gift request page
+router.get('/request', function(req, res, next) {
+  if (!req.session.username) res.redirect('/users/login');
+  else res.render('request');
+});
+
+// gift submission page
+router.get('/submit', function(req, res, next) {
+  if (!req.session.username) res.redirect('/users/login');
+  else res.render('submit');
+});
 
 module.exports = router;
