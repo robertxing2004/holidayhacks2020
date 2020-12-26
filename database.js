@@ -32,6 +32,8 @@ var submitSchema = new Schema({ //pending submissions
   _id: Schema.Types.ObjectId, // _id of corresponding request
   id: String, //id of user who made the submission
   requestid: String, //id of user who made the request
+  description: String,
+  maxCost: String, // maximum cost allowed for the gift
   accepted: Boolean // whether a submission was accepted
 });
 

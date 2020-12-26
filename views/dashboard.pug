@@ -1,5 +1,8 @@
 extends layout
 
+block scripts
+  script(src="/javascripts/api.js")
+
 block content
   link(rel='stylesheet', href='/stylesheets/dashboard-override.css')
   h1= 'My Dashboard'
@@ -7,3 +10,56 @@ block content
   div
     a#requestLink(class='button', href='/users/request') Request a Gift
     a#submitLink(class='button button2', href='/users/createsubmit') Submit a Gift
+  
+  h2= 'Confirm Gifts'
+  p Tell us if you've received the following gifts
+  table#confirmTable
+    thead
+      tr
+        th From:
+        th Gift Description
+        th Max Price
+    tbody
+      each cnf in confirms
+        tr
+          - var mongoId = cnf._id;
+          td= cnf.id
+          td= cnf.description
+          td= cnf.maxCost
+          td
+            button(onclick="confirmsubmission(" + true + ",'" + mongoId + "')") Yes
+            button(onclick="confirmsubmission(" + false + ",'" + mongoId + "')") No
+
+  h2= 'My Gift Submissions'
+  p Edit your gift submissions
+  //-
+    table#submissionTable
+      thead
+        tr
+          th Username
+          th Gift Description
+          th Max Price
+      tbody
+        each sub in submissions
+          tr
+            - var mongoId = req._id;
+            td(onclick="addsubmission('" + mongoId + "')")= req.id
+            td(onclick="addsubmission('" + mongoId + "')")= req.description
+            td(onclick="addsubmission('" + mongoId + "')")= req.maxCost
+    
+  h2= 'My Gift Requests'
+  p Edit your gift requests
+  //-
+    table#requestTable
+      thead
+        tr
+          th Username
+          th Gift Description
+          th Max Price
+      tbody
+        each req in requests
+          tr
+            - var mongoId = req._id;
+            td(onclick="addsubmission('" + mongoId + "')")= req.id
+            td(onclick="addsubmission('" + mongoId + "')")= req.description
+            td(onclick="addsubmission('" + mongoId + "')")= req.maxCost

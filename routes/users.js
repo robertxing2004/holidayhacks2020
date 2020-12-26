@@ -7,11 +7,25 @@ var database = require('../database');
 var radar = require('../radar');
 
 // Users profile page
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
   else {
-    console.log(req.session.userid);
-    res.render('dashboard', { id: req.session.userid });
+    let confirms = [];
+    try {
+      let res = await database.submissions.find({requestid: req.session.userid}).exec();
+      for (conf of res) {
+        console.log(conf);
+        confirms.push(conf);
+      }
+    }
+    catch(err) {
+      console.log(err);
+    }
+
+    res.render('dashboard', {
+      id: req.session.userid,
+      confirms: confirms
+    });
   }
 });
 

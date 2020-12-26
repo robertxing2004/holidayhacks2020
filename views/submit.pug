@@ -1,25 +1,7 @@
 extends layout
 
-
 block scripts
-  script.
-    async function addsubmission(mongoId) { // add submission given the mongoDB _id attribute
-      let res = await fetch(
-        '/addsubmission',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({mongoId: mongoId})
-        }
-      );
-      res = await res.json();
-      message = res.message;
-      console.log(message);
-      // alert user of response
-      alert(message);
-    }
+  script(src="/javascripts/api.js")
 
 block content
   link(rel='stylesheet', href='/stylesheets/submit-override.css')

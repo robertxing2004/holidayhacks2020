@@ -4,9 +4,6 @@ var properties = require('./properties');
 
 // Create a Radar.io geofence only if it doesn't exist for the user yet
 function createGeofence(id, description, coordinates) {
-    console.log(id);
-    console.log(description);
-    console.log(coordinates);
     axios.get(
         `https://api.radar.io/v1/geofences/users/${id}`,
         {headers: {Authorization: `${properties.radarSecret}`}}
