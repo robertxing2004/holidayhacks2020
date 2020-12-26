@@ -3,9 +3,8 @@ extends layout
 block scripts
   script.
   var users = app.locals.users;
-  var usernames = mongoose.model('username', users);
-  usernames.select('username points');
-  usernames.sort({points: -1});
+  users.select('username points');
+  users.sort({points: -1});
 
 block content
   h1= 'Leaderboard'
@@ -17,23 +16,23 @@ block content
       th Points
     tr
       th 1
-      th "#{usernames.select('username')[0]}"
-      th #{usernames.select('points')[0]}
+      th "#{users.select('username')[0]}"
+      th #{users.select('points')[0]}
     tr
       th 2
-      th "#{usernames.select('username')[1]}"
-      th #{usernames.select('points')[1]}
+      th "#{users.select('username')[1]}"
+      th #{users.select('points')[1]}
     tr
       th 3
-      th "#{usernames.select('username')[2]}"
-      th #{usernames.select('points')[2]}
+      th "#{users.select('username')[2]}"
+      th #{users.select('points')[2]}
     tr
       th 4
-      th "#{usernames.select('username')[3]}"
-      th #{usernames.select('points')[3]}
+      th "#{users.select('username')[3]}"
+      th #{users.select('points')[3]}
     tr
       th 5
-      th "#{usernames.select('username')[4]}"
-      th #{usernames.select('points')[4]}
+      th "#{users.select('username')[4]}"
+      th #{users.select('points')[4]}
 
     
