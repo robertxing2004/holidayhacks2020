@@ -12,7 +12,7 @@ block scripts
       }
       console.log(res);
       document.getElementById('giftRequestForm').action
-      = `/users/createrequest?coords=${res.address.geometry.coordinates}`;
+      = `/users/createrequest?lo=${res.address.longitude}&la=${res.address.latitude}`;
     });
 
 block content

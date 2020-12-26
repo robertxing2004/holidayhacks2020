@@ -72,14 +72,20 @@ router.get('/submit', function(req, res, next) {
 router.post('/createrequest', function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
   
-  if (!radar.checkGeofence(req.session.userid)) {
-    console.log('creating geofence...');
-    radar.createGeofence(
-      req.session.userid,
-      req.body.description,
-      req.query.coords
-    );
-  }
+  radar.createGeofence(
+    req.session.userid,
+    `Geofence for ${req.session.userid}`,
+    [req.query.lo, req.query.la]
+  );
+
+  let request = new database.requests({
+    id: req.session.userid,
+    description: req.body.description,
+    maxCost: req.body.maxCost
+  });
+  request.save(err => {console.log(err);});
+
+  res.redirect('/users');
 });
 
 module.exports = router;
