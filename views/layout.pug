@@ -5,6 +5,8 @@ html
     link(rel="preconnect", href="https://fonts.gstatic.com")
     link(href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap", rel="stylesheet")
     link(rel='stylesheet', href='/stylesheets/style.css')
+    block scripts
+  body
     nav
       ul#navbar
         li
@@ -15,5 +17,5 @@ html
           a(href='/users/request') Request a Gift
         li
           a(href='/') Home
-      .content
-        block content
+    .content
+      block content
