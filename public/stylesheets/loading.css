@@ -1,7 +1,7 @@
 body {
     background-image: url('/images/loading.png');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100vw;
 }
 
 div a {
