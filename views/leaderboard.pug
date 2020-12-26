@@ -1,7 +1,5 @@
 extends layout
 
-block scripts
-  script.
   var users = app.locals.users;
   users.select('username points');
   users.sort({points: -1});
