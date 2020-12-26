@@ -23,9 +23,14 @@ var userSchema = new Schema({
 });
 
 var requestSchema = new Schema({
-    id: String,
+    id: String, //id of user who made the request
     description: String,
     maxCost: String
+});
+
+var submitSchema = new Schema({ //pending submissions
+  id: String, //id of user who made the submission
+  requestid: String, //id of user who made the request
 });
 
 var users = db.model('users', userSchema);

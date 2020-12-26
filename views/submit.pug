@@ -2,7 +2,24 @@ extends layout
 
 
 block scripts
-  
+  script.
+    async function addsubmission(mongoId) { // add submission given the mongoDB _id attribute
+      let res = await fetch(
+        '/users/addsubmission',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({mongoId: mongoId})
+        }
+      );
+      res = await res.json();
+      message = res.message;
+      console.log(message);
+      // alert user of response
+    }
+
 block content
   link(rel='stylesheet', href='/stylesheets/submit-override.css')
   h1= "Gift Submissions"
@@ -16,6 +33,7 @@ block content
     tbody
       each req in requests
         tr
-          td(class='button', href='')= req.id
-          td(class='button', href='')= req.description
-          td(class='button', href='')= req.maxCost
+          - var mongoId = req._id;
+          td(onclick="addsubmission('" + mongoId + "')")= req.id
+          td(onclick="addsubmission('" + mongoId + "')")= req.description
+          td(onclick="addsubmission('" + mongoId + "')")= req.maxCost
