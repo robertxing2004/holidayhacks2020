@@ -6,6 +6,13 @@ block scripts
     window.onload = () => {
       Radar.initialize('prj_test_pk_d5f66490d6cfa0cbdc3f4075c9f432c2368cdb59');
 
+      Radar.trackOnce((err, res) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+      });
+
       Radar.searchGeofences({
         radius: 10000
       }, (err, res) => {
