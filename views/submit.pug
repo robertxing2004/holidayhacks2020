@@ -1,20 +1,21 @@
 extends layout
 
+
 block scripts
   
-
 block content
-  h1= "Gift Submission"
+  link(rel='stylesheet', href='/stylesheets/submit-override.css')
+  h1= "Gift Submissions"
+  h2= 'Open gift requests near you'
   table#submissionTable
     thead
       tr
-        th Gift requests near you
+        th Username
+        th Gift Description
+        th Max Price
     tbody
       each req in requests
         tr
-          tb
-            td= req.id
-            td= req.description
-            td= req.maxCost
-            td
-              button(onclick="")
+          td(class='button', href='')= req.id
+          td(class='button', href='')= req.description
+          td(class='button', href='')= req.maxCost
