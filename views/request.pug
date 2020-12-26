@@ -6,7 +6,7 @@ block scripts
     window.onload = () => {
       Radar.initialize('prj_test_pk_d5f66490d6cfa0cbdc3f4075c9f432c2368cdb59');
 
-      Radar.trackOnce(function(err, res) {
+      Radar.trackOnce((err, res) => {
         if (err) {
           console.log(err);
           return;
@@ -24,7 +24,7 @@ block content
   form#giftRequestForm(action="/", method="post")
     div#description
       label(for="description") Describe your requested gift: 
-      input(type="text", name="description")
+      input(type="text", name="description", required="required")
     div#maxCost
       label(for="maxCost") Select the maximum cost: 
       select(name="maxCost")
