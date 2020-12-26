@@ -13,7 +13,10 @@ block scripts
           body: JSON.stringify({mongoId: mongoId})
         }
       );
-      console.log(res); // alert user of response
+      res = await res.json();
+      message = res.message;
+      console.log(message);
+      // alert user of response
     }
 
 block content
