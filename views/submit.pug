@@ -1,24 +1,20 @@
 extends layout
 
 block scripts
-  script(src='https://js.radar.io/v3/radar.min.js')
-  script.
-    window.onload = () => {
-      Radar.initialize('prj_test_pk_d5f66490d6cfa0cbdc3f4075c9f432c2368cdb59');
-
-      Radar.searchGeofences({
-        radius: 10000
-      }, (err, res) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-
-        console.log(res);
-        //res.geofences array of geofence objects, externalId is id
-        //do stuff with js here
-      });
-    }
+  
 
 block content
   h1= "Gift Submission"
+  table#submissionTable
+    thead
+      tr
+        th Gift requests near you
+    tbody
+      each req in requests
+        tr
+          tb
+            td= req.id
+            td= req.description
+            td= req.maxCost
+            td
+              button(onclick="")

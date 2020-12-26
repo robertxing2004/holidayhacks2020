@@ -21,7 +21,7 @@ block scripts
 block content
   link(rel='stylesheet', href='/stylesheets/request-override.css')
   h1= "Gift Request"
-  form#giftRequestForm(action="/", method="post")
+  form#giftRequestForm(action="/users/createrequest", method="post")
     div#description
       label(for="description") Describe your requested gift: 
       input(type="text", name="description", required="required")

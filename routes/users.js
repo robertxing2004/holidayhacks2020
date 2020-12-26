@@ -62,10 +62,34 @@ router.get('/request', function(req, res, next) {
   else res.render('request');
 });
 
-// gift submission page
-router.get('/submit', function(req, res, next) {
+// gift submission page, requires data from /createsubmit
+router.post('/submit', async function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
-  else res.render('submit');
+
+  let requests = [];
+  let geofences = JSON.parse(req.body.geofences);
+  let n = 0;
+
+  for (gf of geofences) { // Displays max of 15 gift requests near you
+    if (n >= 15) break;
+    console.log(gf);
+    try {
+      let res = await database.requests.find({id: gf.externalId}).exec();
+      for (k = 0; k < res.length && n < 15; ++k) {
+        console.log(res[k]);
+        requests.push(res[k]);
+        ++n;
+      }
+    }
+    catch(err) {
+      console.log('\n\n\n******** error occured *********');
+      console.log(err);
+    }
+  }
+
+  console.log('\n\n\n********\nRequests');
+  console.log(requests);
+  res.render('submit', {requests: requests});
 });
 
 // create the gift request, and Radar.io geofence if needed
@@ -86,6 +110,20 @@ router.post('/createrequest', function(req, res, next) {
   request.save(err => {console.log(err);});
 
   res.redirect('/users');
+});
+
+// create the submissions page with data from the database
+router.get('/createsubmit', function(req, res, next) {
+  if (!req.session.userid) res.redirect('/users/login');
+  else res.render('createsubmit');
+});
+
+// confirm intent to submit a gift for somebody else
+router.get('/addsubmission', function(req, res, next) {
+  if (req.session.userid) {
+    console.log("confirming intent to submit gift");
+  }
+  next();
 });
 
 module.exports = router;
