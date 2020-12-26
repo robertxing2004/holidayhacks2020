@@ -19,6 +19,7 @@ block scripts
     }
 
 block content
+  link(rel='stylesheet', href='/stylesheets/request-override.css')
   h1= "Gift Request"
   form#giftRequestForm(action="/", method="post")
     div#description
@@ -34,4 +35,6 @@ block content
         option(value="$100") $100
         option(value="$200") $200
         option(value="$500+") $500+
-    input(type="submit", value="Submit")
+    div#submission
+      p Make sure to look over your request before submitting :)
+      input(type="submit", value="Submit")
