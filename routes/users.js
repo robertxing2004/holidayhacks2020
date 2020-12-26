@@ -4,6 +4,7 @@ var axios = require('axios');
 
 var properties = require('../properties');
 var database = require('../database');
+var radar = require('../radar');
 
 // Users profile page
 router.get('/', function(req, res, next) {
@@ -15,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 // Users login page
-router.get('/login', function(req, res, next) {
+router.all('/login', function(req, res, next) {
   res.redirect(`https://github.com/login/oauth/authorize?client_id=${properties.clientID}&scope=user`);
 });
 
@@ -27,7 +28,7 @@ router.get('/confirmlogin', function(req, res, next) {
     client_secret: properties.clientSecret,
     code: req.query.code
   };
-  const opts = { headers: { accept: 'application/json' } };
+  const opts = {headers: {accept: 'application/json' }};
   var data;
 
   axios.post('https://github.com/login/oauth/access_token', body, opts).
@@ -55,13 +56,22 @@ router.get('/confirmlogin', function(req, res, next) {
 // gift request page
 router.get('/request', function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
-  else res.render('request');
+  else {
+
+    res.render('request');
+  }
 });
 
 // gift submission page
 router.get('/submit', function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
   else res.render('submit');
+});
+
+// create a geofence
+router.post('/geofence', function(req, res, next) {
+  if (!req.session.userid) res.redirect('/users/login');
+  
 });
 
 module.exports = router;

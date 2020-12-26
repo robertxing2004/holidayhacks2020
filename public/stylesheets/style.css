@@ -30,8 +30,8 @@ nav li {
 
 nav a {
   font-size: 20px;
-  color: #b9e2fd;
-  padding: 7px 20px;
+  color: #c9e9ff;
+  padding: 5px 20px;
   text-decoration: none;
 }
 
@@ -56,5 +56,14 @@ h2 {
 
 h3 {
   font-weight: lighter;
-  font-size: 26px;
+  font-size: 25px;
+}
+
+a {
+  color: #c9e9ff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #e8f5ff;
 }

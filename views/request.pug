@@ -2,4 +2,18 @@ extends layout
 
 block content
   h1= "Gift Request"
- 
+  form(action="/users/geofence", method="post")
+    div#description
+      label(for="description") Describe your requested gift: 
+      input(type="text", name="description")
+    div#maxCost
+      label(for="maxCost") Select the maximum cost: 
+      select(name="maxCost")
+        option(value="$10") $10
+        option(value="$15") $15
+        option(value="$20") $20
+        option(value="$50") $50
+        option(value="$100") $100
+        option(value="$200") $200
+        option(value="$500+") $500+
+    input(type="submit", value="Submit")
