@@ -10,6 +10,7 @@ div input[type="text"] {
   border: none;
   border-radius: 5px;
   border-bottom: 3px solid white;
+  transition-duration: 0.4s;
 }
 
 div input[type="text"]:hover {
@@ -60,4 +61,5 @@ div input[type="submit"]:hover {
   border-radius: 5px;
   background-color: #e8f5ff;
   color: #2c516b;
+  cursor: pointer;
 }

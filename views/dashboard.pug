@@ -1,9 +1,9 @@
 extends layout
 
 block content
+  link(rel='stylesheet', href='/stylesheets/dashboard-override.css')
   h1= 'My Dashboard'
   p This is where you can keep track of your requests and submissions
   div
     a#requestLink(class='button', href='/users/request') Request a Gift
-  div
     a#submitLink(class='button', href='/users/createsubmit') Submit a Gift
