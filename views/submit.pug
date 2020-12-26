@@ -1,20 +1,39 @@
 extends layout
 
+
 block scripts
-  
+  script.
+    async function addsubmission(mongoId) { // add submission given the mongoDB _id attribute
+      let res = await fetch(
+        '/users/addsubmission',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({mongoId: mongoId})
+        }
+      );
+      res = await res.json();
+      message = res.message;
+      console.log(message);
+      // alert user of response
+    }
 
 block content
-  h1= "Gift Submission"
+  link(rel='stylesheet', href='/stylesheets/submit-override.css')
+  h1= "Gift Submissions"
+  h2= 'Open gift requests near you'
   table#submissionTable
     thead
       tr
-        th Gift requests near you
+        th Username
+        th Gift Description
+        th Max Price
     tbody
       each req in requests
         tr
-          tb
-            td= req.id
-            td= req.description
-            td= req.maxCost
-            td
-              button(onclick="")
+          - var mongoId = req._id;
+          td(onclick="addsubmission('" + mongoId + "')")= req.id
+          td(onclick="addsubmission('" + mongoId + "')")= req.description
+          td(onclick="addsubmission('" + mongoId + "')")= req.maxCost

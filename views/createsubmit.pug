@@ -11,7 +11,7 @@ block scripts
           console.log(err);
           return;
         }
-      });
+      }); // To prompt user for location access permissions
 
       Radar.searchGeofences({
         radius: 10000
