@@ -3,17 +3,20 @@ extends layout
 block scripts
   script(src='https://js.radar.io/v3/radar.min.js')
   script.
-    Radar.initialize('prj_test_pk_d5f66490d6cfa0cbdc3f4075c9f432c2368cdb59');
+    window.onload = () => {
+      Radar.initialize('prj_test_pk_d5f66490d6cfa0cbdc3f4075c9f432c2368cdb59');
 
-    Radar.ipGeocode(function(err, res) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(res);
-      document.getElementById('giftRequestForm').action
-      = `/users/createrequest?lo=${res.address.longitude}&la=${res.address.latitude}`;
-    });
+      Radar.trackOnce(function(err, res) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+
+        console.log(res);
+        document.getElementById('giftRequestForm').action
+        = `/users/createrequest?lo=${res.location.longitude}&la=${res.location.latitude}`;
+      });
+    }
 
 block content
   h1= "Gift Request"
