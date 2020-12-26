@@ -1,9 +1,24 @@
 extends layout
 
+block scripts
+  script(src='https://js.radar.io/v3/radar.min.js')
+  script.
+    Radar.initialize('prj_test_pk_d5f66490d6cfa0cbdc3f4075c9f432c2368cdb59');
+
+    Radar.ipGeocode(function(err, res) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log(res);
+      document.getElementById('giftRequestForm').action
+      = `/users/createrequest?lo=${res.address.longitude}&la=${res.address.latitude}`;
+    });
+
 block content
   link(rel='stylesheet', href='/stylesheets/request-override.css')
   h1= "Gift Request"
-  form(action="/users/geofence", method="post")
+  form#giftRequestForm(action="/", method="post")
     div#description
       label(for="description") Describe your requested gift: 
       input(type="text", name="description")
