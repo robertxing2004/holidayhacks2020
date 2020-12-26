@@ -1,0 +1,63 @@
+div input[type="text"] {
+  width: 100%;
+  background-color: #2c516b;
+  color: #e8f5ff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  padding: 15px 15px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border: none;
+  border-radius: 5px;
+  border-bottom: 3px solid white;
+}
+
+div input[type="text"]:hover {
+  border-radius: 5px;
+  background-color: #335f7e;
+}
+
+div input[type="text"]:focus {
+  outline: none;
+  border-radius: 5px;
+  border-bottom: 3px solid white;
+  background-color: #335f7e;
+}
+
+div select {
+  width: 100%;
+  background-color: #e8f5ff;
+  color: #2c516b;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  padding: 15px 15px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border: none;
+  border-radius: 5px;
+}
+
+div select:focus {
+    outline: none;
+}
+
+div input[type="submit"] {
+  width: 100%;
+  background-color: #2c516b;
+  color: #e8f5ff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  padding: 15px 15px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-color: #e8f5ff;
+  border-width: 3px;
+  border-radius: 5px;
+  transition-duration: 0.4s;
+}
+
+div input[type="submit"]:hover {
+  border-radius: 5px;
+  background-color: #e8f5ff;
+  color: #2c516b;
+}

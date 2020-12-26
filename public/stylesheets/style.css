@@ -33,17 +33,13 @@ nav a {
   color: #c9e9ff;
   padding: 5px 20px;
   text-decoration: none;
+  border-radius: 4px;
+  transition-duration: 0.4s;
 }
 
 nav a:hover {
-  background-color: #2f5774;
+  background-color: #335f7e;
   color: #e8f5ff;
-}
-
-div a {
-  padding: 0;
-  margin: 0;
-  font-size: 30;
 }
 
 h1 {
@@ -62,8 +58,4 @@ h3 {
 a {
   color: #c9e9ff;
   text-decoration: none;
-}
-
-a:hover {
-  color: #e8f5ff;
 }
