@@ -7,8 +7,11 @@ var database = require('../database');
 
 // Users profile page
 router.get('/', function(req, res, next) {
-  if (!req.session.username) res.redirect('/users/login');
-  else res.render('dashboard');
+  if (!req.session.userid) res.redirect('/users/login');
+  else {
+    console.log(req.session.userid);
+    res.render('dashboard', { id: req.session.userid });
+  }
 });
 
 // Users login page
@@ -39,9 +42,9 @@ router.get('/confirmlogin', function(req, res, next) {
         username: data.name,
         points: 0
       });
-      user.save(err => {console.log(`\n\n\n***\n${err}\n***\n\n\n`);});
-      req.session.username = data.login;
-      console.log(req.session.username);
+      user.save(err => {console.log(err);});
+      req.session.userid = data.login;
+      console.log(req.session.userid);
     }).
     then(() => {
       res.redirect('/users');
@@ -51,13 +54,13 @@ router.get('/confirmlogin', function(req, res, next) {
 
 // gift request page
 router.get('/request', function(req, res, next) {
-  if (!req.session.username) res.redirect('/users/login');
+  if (!req.session.userid) res.redirect('/users/login');
   else res.render('request');
 });
 
 // gift submission page
 router.get('/submit', function(req, res, next) {
-  if (!req.session.username) res.redirect('/users/login');
+  if (!req.session.userid) res.redirect('/users/login');
   else res.render('submit');
 });
 

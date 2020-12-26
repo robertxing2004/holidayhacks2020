@@ -1,17 +1,8 @@
 doctype html
 html
-  link(rel="preconnect", href="https://fonts.gstatic.com")
-  link(href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap", rel="stylesheet")
-  link(rel='stylesheet', href='/stylesheets/style.css')
-  nav
-    ul#navbar
-      li
-        a(href='/users/') Dashboard
-      li
-        a(href='/users/submit') Submit a Gift
-      li
-        a(href='/users/request') Request a Gift
-      li
-        a(href='/') Home
-    .content
-      block content
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/layout.css')
+    block scripts
+  body
+    block content
