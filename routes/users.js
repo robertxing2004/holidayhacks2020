@@ -71,7 +71,7 @@ router.get('/submit', function(req, res, next) {
 // create a geofence
 router.post('/geofence', function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
-
+  
 });
 
 module.exports = router;

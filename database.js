@@ -25,7 +25,7 @@ var userSchema = new Schema({
 var requestSchema = new Schema({
     id: String,
     description: String,
-    maxCost: Number
+    maxCost: String
 });
 
 var users = db.model('users', userSchema);
