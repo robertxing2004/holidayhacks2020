@@ -11,6 +11,10 @@ block scripts
       
     }
 
+    Radar.ipGeocode(function(err, result) {
+      if (!err) console.log(result);
+    });
+
 block content
   h1= 'My Dashboard'
   p This is where you can keep track of your requests and submissions
