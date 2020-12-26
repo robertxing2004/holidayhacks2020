@@ -1,19 +1,7 @@
 extends layout
 
 block content
-  link(rel='stylesheet', href='/stylesheets/index.css')
-  link(rel="preconnect", href="https://fonts.gstatic.com")
-  link(href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap", rel="stylesheet")
-  nav
-    ul
-      li
-        a(class='button', href='/users/') Dashboard
-      li
-        a(class='button', href='/users/request') Request a Gift
-      li
-        a(class='button', href='/users/submit') Submit a Gift
-
-  h1= title
-  p Feeling generous this holiday season? Spread the cheer with our gift-exchange platform!
+  h1#title= title
+  h3 Feeling generous this holiday season? Spread the cheer with our gift-exchange platform!
   div
     a(class='button', href='/users') Get Started!
