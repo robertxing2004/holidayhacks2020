@@ -1,0 +1,21 @@
+body {
+    background-image: url('/images/background.png');
+    background-size: cover;
+}
+
+h3 {
+    text-align: left;
+    padding-right: 600px;
+}
+
+div a{
+    font-size: 30px;
+    color: #2c516b;
+    padding: 5px 20px;
+    background-color: #e8f5ff;
+}
+
+div a:hover{
+    background-color: #d3ecff;
+    color: #2c516b;
+}
