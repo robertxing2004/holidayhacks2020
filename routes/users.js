@@ -119,11 +119,14 @@ router.get('/createsubmit', function(req, res, next) {
 });
 
 // confirm intent to submit a gift for somebody else
-router.get('/addsubmission', function(req, res, next) {
-  if (req.session.userid) {
+router.post('/addsubmission', function(req, res, next) {
+  if (!req.session.userid) res.send("Not logged in");
+  else {
     console.log("confirming intent to submit gift");
+    console.log(req.body.mongoId);
+
+    res.send("Submission added!");
   }
-  next();
 });
 
 module.exports = router;
