@@ -19,7 +19,7 @@ block content
       tbody
         - var i = 0;
         for req in nearrequests
-          if exists[i++]
+          if nearexists[i++]
             tr(class="exists")
               td(onclick="addSubmission('" + req._id + "')")= req.id
               td(onclick="addSubmission('" + req._id + "')")= req.description
@@ -30,4 +30,30 @@ block content
               td(onclick="addSubmission('" + req._id + "')" class="clickable")= req.description
               td(onclick="addSubmission('" + req._id + "')" class="clickable")= req.maxCost
   else
-    h2= "There aren't any gift requests near you"
+    h2= "There aren't any gift requests near you!"
+  
+  if allrequests.length > 0
+    h2= 'Search through all gift requests'
+    p.
+      Click on a gift request to receive delivery directions on your dashboard!
+    table#submissionTable
+      thead
+        tr
+          th Name
+          th Gift Description
+          th Max Price
+      tbody
+        - var i = 0;
+        for req in allrequests
+          if allexists[i++]
+            tr(class="exists")
+              td(onclick="addSubmission('" + req._id + "')")= req.id
+              td(onclick="addSubmission('" + req._id + "')")= req.description
+              td(onclick="addSubmission('" + req._id + "')")= req.maxCost
+          else
+            tr
+              td(onclick="addSubmission('" + req._id + "')" class="clickable")= req.id
+              td(onclick="addSubmission('" + req._id + "')" class="clickable")= req.description
+              td(onclick="addSubmission('" + req._id + "')" class="clickable")= req.maxCost
+  else
+    h2= "There aren't any gift requests yet!"

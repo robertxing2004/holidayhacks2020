@@ -31,6 +31,23 @@ function createGeofence(id, description, coordinates) {
     });
 }
 
+// Get all geofences
+async function getGeofences() {
+    let res;
+    try {
+        res = await axios.get(
+            'https://api.radar.io/v1/geofences',
+            {headers: {Authorization: `${properties.radarSecret}`}}
+        );
+        console.log('\n\n\n*******\ngetting geofences');
+    }
+    catch(err) {
+        console.log(err);
+    }
+    console.log(res);
+    return res.data.geofences;
+}
+
 // Get coordinates from geofence of user
 async function getGeofenceCoords(id, httpres) {
     axios.get(
@@ -52,5 +69,6 @@ async function getGeofenceCoords(id, httpres) {
 
 module.exports = {
     createGeofence: createGeofence,
+    getGeofences: getGeofences,
     getGeofenceCoords: getGeofenceCoords
 };

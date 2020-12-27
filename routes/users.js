@@ -117,11 +117,16 @@ router.post('/submit', async function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
 
   let nearrequests = [];
-  let exists = [];
-  let geofences = JSON.parse(req.body.geofences);
-  let n = 0;
+  let allrequests = [];
 
-  for (gf of geofences) { // Displays max of 15 gift requests near you
+  let nearexists = [];
+  let allexists = [];
+
+  let neargeofences = JSON.parse(req.body.geofences);
+  let allgeofences = await radar.getGeofences();
+  
+  let n = 0;
+  for (gf of neargeofences) { // Displays max of 15 gift requests near you
     if (n >= 15) break;
     try {
       let res = await database.requests.find({id: gf.externalId}).exec();
@@ -130,8 +135,8 @@ router.post('/submit', async function(req, res, next) {
           request_id: res[k]._id,
           id: req.session.userid
         }).exec();
-        if (submitquery) exists.push(true);
-        else exists.push(false);
+        if (submitquery) nearexists.push(true);
+        else nearexists.push(false);
         nearrequests.push(res[k]);
         ++n;
       }
@@ -141,11 +146,33 @@ router.post('/submit', async function(req, res, next) {
     }
   }
 
+  for (gf of allgeofences) { // Displays all gift requests
+    try {
+      let res = await database.requests.find({id: gf.externalId}).exec();
+      for (sub of res) {
+        let submitquery = await database.submissions.findOne({
+          request_id: sub._id,
+          id: req.session.userid
+        }).exec();
+        if (submitquery) allexists.push(true);
+        else allexists.push(false);
+        allrequests.push(sub);
+      }
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   console.log(nearrequests);
-  console.log(exists);
+  console.log(nearexists);
+  console.log(allrequests);
+  console.log(allexists);
   res.render('submit', {
     nearrequests: nearrequests,
-    exists: exists
+    nearexists: nearexists,
+    allrequests: allrequests,
+    allexists: allexists
   });
 });
 
