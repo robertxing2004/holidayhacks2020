@@ -96,6 +96,23 @@ async function getLocation(userid) { //get coordinates from an id (assumes a geo
         }
     );
     res = await res.json();
-    coords = res.coords;
-    //do something with coords
+
+    // Create post request and redirect to directions page
+    let form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/users/directions';
+    form.style.display = 'none';
+    
+    let coords = document.createElement('input');
+    coords.value = JSON.stringify(res.coords);
+    coords.name = 'coords';
+
+    let id = document.createElement('input');
+    id.value = userid;
+    id.name = 'id';
+
+    form.appendChild(coords);
+    form.appendChild(id);
+    document.body.appendChild(form);
+    form.submit();
 }

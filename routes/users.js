@@ -166,4 +166,14 @@ router.get('/createsubmit', function(req, res, next) {
   else res.render('createsubmit');
 });
 
+// shows the address of the gift recipient and directions to get there
+router.post('/directions', function(req, res, next) {
+  if (!req.session.userid) res.redirect('/users/login');
+  
+  res.render('directions', {
+    userid: req.body.id,
+    
+  });
+})
+
 module.exports = router;
