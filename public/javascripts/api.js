@@ -1,6 +1,6 @@
 // Interacting with the API
 
-async function addsubmission(mongoId) { // add own submission given the mongoDB _id attribute
+async function addSubmission(mongoId) { // add own submission given the mongoDB _id attribute
     let res = await fetch(
         '/addsubmission',
         {
@@ -18,7 +18,7 @@ async function addsubmission(mongoId) { // add own submission given the mongoDB 
     alert(message);
 }
 
-async function confirmsubmission(confirmed, mongoId) { //confirm someone else's submission to you
+async function confirmSubmission(confirmed, mongoId) { //confirm someone else's submission to you
     console.log(mongoId);
     let res = await fetch(
         '/confirmsubmission',
@@ -40,7 +40,7 @@ async function confirmsubmission(confirmed, mongoId) { //confirm someone else's 
     alert(message);
 }
 
-async function deletesubmission(mongoId) { //delete own submission
+async function deleteSubmission(mongoId) { //delete own submission
     console.log(mongoId);
     let res = await fetch(
         '/deletesubmission',
@@ -59,7 +59,7 @@ async function deletesubmission(mongoId) { //delete own submission
     alert(message);
 }
 
-async function deleterequest(mongoId) { //delete own gift request
+async function deleteRequest(mongoId) { //delete own gift request
     console.log(mongoId);
     let res = await fetch(
         '/deleterequest',
@@ -76,4 +76,8 @@ async function deleterequest(mongoId) { //delete own gift request
     console.log(message);
     // alert user of response
     alert(message);
+}
+
+async function getAddress() { //get an address from an id (assumes a geofence exists)
+
 }

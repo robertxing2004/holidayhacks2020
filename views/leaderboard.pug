@@ -1,36 +1,23 @@
 extends layout
 
-  var users = app.locals.users;
-  users.select('username points');
-  users.sort({points: -1});
-
 block content
-  h1= 'Leaderboard'
-  div
-  table()
-    tr 
-      th Rank
-      th User
-      th Points
-    tr
-      th 1
-      th "#{users.select('username')[0]}"
-      th #{users.select('points')[0]}
-    tr
-      th 2
-      th "#{users.select('username')[1]}"
-      th #{users.select('points')[1]}
-    tr
-      th 3
-      th "#{users.select('username')[2]}"
-      th #{users.select('points')[2]}
-    tr
-      th 4
-      th "#{users.select('username')[3]}"
-      th #{users.select('points')[3]}
-    tr
-      th 5
-      th "#{users.select('username')[4]}"
-      th #{users.select('points')[4]}
+  h1= title
+  if users.length > 0
+    table#leaderboardTable
+      thead
+        tr 
+          th Rank
+          th User
+          th Points
+      tbody
+        - var i = 0;
+        while i < users.length
+          tr
+            td= ++i
+            td= users[i-1].id
+            td= users[i-1].points
+  else
+    h2 There aren't any users yet...
+        
 
     

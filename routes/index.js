@@ -9,6 +9,17 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Neighbourhood Santa' });
 });
 
+// Leaderboard page
+router.get('/leaderboard', async function(req, res, next) {
+  let users = await database.users.find().exec();
+  users.slice(0, 15); //limit 15 users max
+
+  res.render('leaderboard', {
+    title: 'Leaderboard',
+    users: users
+  });
+});
+
 /*
 /
 /
