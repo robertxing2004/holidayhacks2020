@@ -116,18 +116,23 @@ router.get('/request', function(req, res, next) {
 router.post('/submit', async function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
 
-  let requests = [];
+  let nearrequests = [];
+  let exists = [];
   let geofences = JSON.parse(req.body.geofences);
   let n = 0;
 
   for (gf of geofences) { // Displays max of 15 gift requests near you
     if (n >= 15) break;
-    console.log(gf);
     try {
       let res = await database.requests.find({id: gf.externalId}).exec();
       for (k = 0; k < res.length && n < 15; ++k) {
-        console.log(res[k]);
-        requests.push(res[k]);
+        let submitquery = await database.submissions.findOne({
+          request_id: res[k]._id,
+          id: req.session.userid
+        }).exec();
+        if (submitquery) exists.push(true);
+        else exists.push(false);
+        nearrequests.push(res[k]);
         ++n;
       }
     }
@@ -136,8 +141,12 @@ router.post('/submit', async function(req, res, next) {
     }
   }
 
-  console.log(requests);
-  res.render('submit', {requests: requests});
+  console.log(nearrequests);
+  console.log(exists);
+  res.render('submit', {
+    nearrequests: nearrequests,
+    exists: exists
+  });
 });
 
 // create the gift request, and Radar.io geofence if needed
