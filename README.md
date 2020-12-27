@@ -1,5 +1,6 @@
 # Neighbourhood Santa
-Winner of "In the spirit of the Holiday Season" Hack
+_Winner of "In the spirit of the Holiday Season" Hack_
+Submission to MLH's Holiday Hacks 2020
 ## Inspiration
 One of the best parts of the holidays is the presents! However, there are many circumstances that cause some to not receive presents. Inspired by efforts such as toy donations to children's hospitals and winter food bank drives, we wanted to make it easier for less fortunate people to receive presents, and kind-hearted people to give them.
 
