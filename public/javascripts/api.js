@@ -16,6 +16,8 @@ async function addSubmission(mongoId) { // add own submission given the mongoDB 
     console.log(message);
     // alert user of response
     alert(message);
+    // show changes
+    location.reload();
 }
 
 async function confirmSubmission(confirmed, mongoId) { //confirm someone else's submission to you
@@ -35,9 +37,10 @@ async function confirmSubmission(confirmed, mongoId) { //confirm someone else's 
     );
     res = await res.json();
     message = res.message;
-    console.log(message);
     // alert user of response
     alert(message);
+    // show changes
+    location.reload();
 }
 
 async function deleteSubmission(mongoId) { //delete own submission
@@ -54,12 +57,13 @@ async function deleteSubmission(mongoId) { //delete own submission
     );
     res = await res.json();
     message = res.message;
-    console.log(message);
     // alert user of response
     alert(message);
+    // show changes
+    location.reload();
 }
 
-async function deleteRequest(mongoId) { //delete own gift request
+async function deleteRequest(mongoId) { //delete own gift request and all submissions associated with it
     console.log(mongoId);
     let res = await fetch(
         '/deleterequest',
@@ -73,9 +77,10 @@ async function deleteRequest(mongoId) { //delete own gift request
     );
     res = await res.json();
     message = res.message;
-    console.log(message);
     // alert user of response
     alert(message);
+    // show changes
+    location.reload();
 }
 
 async function getAddress() { //get an address from an id (assumes a geofence exists)

@@ -13,14 +13,13 @@ router.get('/', async function(req, res, next) {
     let confirms = [];
     let submissions = [];
     let requests = [];
-    
+
     let userid = req.session.userid
     let user;
 
     try {
       let res = await database.submissions.find({requestid: userid}).exec();
       for (conf of res) {
-        console.log(conf);
         confirms.push(conf);
       }
     }
@@ -31,7 +30,6 @@ router.get('/', async function(req, res, next) {
     try {
       let res = await database.submissions.find({id: userid}).exec();
       for (sub of res) {
-        console.log(sub);
         submissions.push(sub);
       }
     }
@@ -42,7 +40,6 @@ router.get('/', async function(req, res, next) {
     try {
       let res = await database.requests.find({id: userid}).exec();
       for (req of res) {
-        console.log(req);
         requests.push(req);
       }
     }
@@ -58,6 +55,7 @@ router.get('/', async function(req, res, next) {
     }
 
     res.render('dashboard', {
+      id: user.id,
       name: user.username,
       points: user.points,
       confirms: confirms,

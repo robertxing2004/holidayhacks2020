@@ -6,7 +6,10 @@ block scripts
 block content
   link(rel='stylesheet', href='/stylesheets/dashboard-override.css')
   h1= 'My Dashboard'
-  h2= 'Welcome back, ' + name + '. You have ' + points + ' points.'
+  if name
+    h2= 'Welcome back, ' + name + '. You have ' + points + ' points.'
+  else
+    h2= 'Welcome back, ' + id + '. You have ' + points + ' points.'
   p This is where you keep track of your requests and submissions
   div
     a#requestLink(class='button', href='/users/request') Request a Gift
@@ -27,8 +30,8 @@ block content
             td= cnf.id
             td= cnf.description
             td= cnf.maxCost
-            td(onclick="confirmSubmission(" + true + ",'" + cnf._id + "')") Yes
-            td(onclick="confirmSubmission(" + false + ",'" + cnf._id + "')") No
+            td(onclick="confirmSubmission(" + true + ",'" + cnf.request_id + "')") Yes
+            td(onclick="confirmSubmission(" + false + ",'" + cnf.request_id + "')") No
 
   if submissions.length > 0
     h1= 'My Gift Submissions'
@@ -38,15 +41,16 @@ block content
         tr
           th To
           th Description
-          th Get address
           th Max Price
+          th Get Address
       tbody
         each sub in submissions
           tr
             td= sub.requestid
             td= sub.description
+            td= sub.maxCost
             td(onclick="getAddress('" + sub.requestid + "')") @
-            td(onclick="deleteSubmission('" + sub._id + "')")= sub.maxCost
+            td(onclick="deleteSubmission('" + sub.request_id + "')") Delete
     
   if requests.length > 0
     h1= 'My Gift Requests'
@@ -61,4 +65,4 @@ block content
           tr
             td= req.description
             td= req.maxCost
-            td(onclick="deleteRequest('" + req._id + "')")
+            td(onclick="deleteRequest('" + req._id + "')") Delete

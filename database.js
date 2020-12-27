@@ -29,7 +29,7 @@ var requestSchema = new Schema({
 });
 
 var submitSchema = new Schema({ //pending submissions
-  _id: Schema.Types.ObjectId, // _id of corresponding request
+  request_id: Schema.Types.ObjectId, // _id of corresponding request
   id: String, //id of user who made the submission
   requestid: String, //id of user who made the request
   description: String,
