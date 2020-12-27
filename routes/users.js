@@ -170,9 +170,12 @@ router.get('/createsubmit', function(req, res, next) {
 router.post('/directions', function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
   
+  console.log(req.body.lo);
+  console.log(req.body.la);
   res.render('directions', {
     userid: req.body.id,
-    
+    lo: req.body.lo,
+    la: req.body.la
   });
 })
 

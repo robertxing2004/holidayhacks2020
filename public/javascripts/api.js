@@ -103,15 +103,20 @@ async function getLocation(userid) { //get coordinates from an id (assumes a geo
     form.action = '/users/directions';
     form.style.display = 'none';
     
-    let coords = document.createElement('input');
-    coords.value = JSON.stringify(res.coords);
-    coords.name = 'coords';
+    let longitude = document.createElement('input');
+    longitude.value = JSON.stringify(res.lo);
+    longitude.name = 'lo';
+
+    let latitude = document.createElement('input');
+    latitude.value = JSON.stringify(res.la);
+    latitude.name = 'la';
 
     let id = document.createElement('input');
     id.value = userid;
     id.name = 'id';
 
-    form.appendChild(coords);
+    form.appendChild(longitude);
+    form.appendChild(latitude);
     form.appendChild(id);
     document.body.appendChild(form);
     form.submit();

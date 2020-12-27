@@ -39,7 +39,10 @@ async function getGeofenceCoords(id, httpres) {
     ).
     then(res => {
         console.log(res.data.geofence.geometryCenter.coordinates);
-        httpres.send({coords: JSON.stringify(res.data.geofence.geometryCenter.coordinates)});
+        httpres.send({
+            lo: res.data.geofence.geometryCenter.coordinates[0],
+            la: res.data.geofence.geometryCenter.coordinates[1],
+        });
     }).
     catch(err => {
         console.log(err);

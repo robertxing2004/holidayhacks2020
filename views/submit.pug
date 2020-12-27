@@ -21,8 +21,8 @@ block content
         each req in requests
           tr
             - var mongoId = req._id;
-            td(onclick="addSubmission('" + mongoId + "')")= req.id
-            td(onclick="addSubmission('" + mongoId + "')")= req.description
-            td(onclick="addSubmission('" + mongoId + "')")= req.maxCost
+            td(onclick="addSubmission('" + mongoId + "')" class="clickable")= req.id
+            td(onclick="addSubmission('" + mongoId + "')" class="clickable")= req.description
+            td(onclick="addSubmission('" + mongoId + "')" class="clickable")= req.maxCost
   else
     h2= "There aren't any gift requests right now..."
