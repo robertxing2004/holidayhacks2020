@@ -38,19 +38,19 @@ block scripts
                 units: 'metric'
             }, (err, res) => {
                 console.log(res);
+                document.getElementById('distance').innerHTML =
+                `The distance is ${res.routes.bike.distance.value/1000} km.
+                 `;
                 document.getElementById('foot').innerHTML =
-                `On foot, you would walk about ${res.routes.foot.distance.value/1000} km.
-                 It would take you ${
+                `On foot, it would take you ${
                     res.routes.foot.duration.value > 0 ? res.routes.foot.duration.text : "no time at all!"
                  }`;
                 document.getElementById('bike').innerHTML =
-                `On a bike, you would ride about ${res.routes.bike.distance.value/1000} km.
-                 It would take you ${
+                `On a bike, it would take you ${
                     res.routes.bike.duration.value > 0 ? res.routes.bike.duration.text : "no time at all!"
                  }`;
                 document.getElementById('car').innerHTML =
-                `In a car, you would drive about ${res.routes.car.distance.value/1000} km.
-                 It would take you ${
+                `In a car, it would take you ${
                     res.routes.car.duration.value > 0 ? res.routes.car.duration.text : "no time at all!"
                  }`;
             });
@@ -61,7 +61,8 @@ block content
     h1 Directions to #{userid}'s address
     h2 Approximate address
     p#address Loading...
-    h2 Distances
-    p#foot Loading...
+    h2 Travel time estimates
+    p#distance Loading...
+    p#foot
     p#bike
     p#car
