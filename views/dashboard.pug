@@ -17,21 +17,21 @@ block content
   
   if confirms.length > 0
     h1= 'Confirm Gifts'
-    p Tell us if you've accepted the following gifts
+    p Confirm if you've accepted the following gifts
     table#confirmTable
       thead
         tr
           th From
           th Description
           th Max Price
+          th
       tbody
         each cnf in confirms
           tr
             td= cnf.id
             td= cnf.description
             td= cnf.maxCost
-            td(onclick="confirmSubmission(" + true + ",'" + cnf.request_id + "')" class="clickable") Yes
-            td(onclick="confirmSubmission(" + false + ",'" + cnf.request_id + "')" class="clickable") No
+            td(onclick="confirmSubmission(" + true + ",'" + cnf.request_id + "')" class="clickable") Confirm
 
   if submissions.length > 0
     h1= 'My Gift Submissions'
@@ -42,6 +42,8 @@ block content
           th To
           th Description
           th Max Price
+          th
+          th
       tbody
         each sub in submissions
           tr
@@ -59,6 +61,7 @@ block content
         tr
           th Description
           th Max Price
+          th 
       tbody
         each req in requests
           tr

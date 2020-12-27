@@ -9,9 +9,7 @@ block content
   if nearrequests.length > 0
     h2= 'Find gift requests near you'
     p.
-      Click on a gift request to deliver the gift!
-      You will receive delivery directions on your dashboard.
-      Submissions you've already submittted are darkened.
+      Click on a gift request to receive delivery directions on your dashboard!
     table#submissionTable
       thead
         tr
@@ -32,4 +30,4 @@ block content
               td(onclick="addSubmission('" + req._id + "')" class="clickable")= req.description
               td(onclick="addSubmission('" + req._id + "')" class="clickable")= req.maxCost
   else
-    h2= "There aren't any gift requests right now..."
+    h2= "There aren't any gift requests near you"
