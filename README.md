@@ -18,7 +18,7 @@ Once we had our idea, we split the workload so that we could each work on what w
 
 We used Radar.io's API extensively, such as for creating geofences for new users, getting gift requests within 10km of you, getting all gift requests in total, reverse Geocoding coordinates into a gift recipient's address, checking the distance between you and the recipient's address, and tracking your location. This was very complex for us as we had limited experience working with APIs, and we spent a lot of debugging (oftentimes very simple) mistakes.
 
-##Challenges we ran into
+## Challenges we ran into
 This was the first time we used MongoDB, so we had a few hiccups getting the initial database connection. This was also our first time using the Radar.io API. One significant challenge we had was trying to create geofences. It turned out that in order to create geofences, we needed to use a secret API key from the backend, but we had been using the public key instead.
 
 Another challenge occurred while trying to create an interface for confirming submissions, deleting your own requests, and deleting your own submissions. We wanted to keep users on the same page without needing to redirect to another page, so we instead created endpoints that would take a POST request and perform the action that we wanted (deleting the request, confirming the submission, etc). This was the first time we created endpoints not meant to be visited by the user!
