@@ -1,4 +1,67 @@
 extends layout
 
+block scripts
+  script(src='https://js.radar.io/v3/radar.min.js')
+  script var destinationlo = #{lo}; var destinationla = #{la};
+  script.
+    window.onload = () => {
+        Radar.initialize('prj_test_pk_d5f66490d6cfa0cbdc3f4075c9f432c2368cdb59');
+
+        Radar.reverseGeocode({
+            latitude: destinationla,
+            longitude: destinationlo
+        }, (err, res) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(res);
+            document.getElementById('address').innerHTML
+            = res.addresses[0].formattedAddress;
+        });
+
+        Radar.trackOnce((err, res) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            Radar.getDistance({
+                origin: {
+                    latitude: res.location.latitude,
+                    longitude: res.location.longitude
+                },
+                destination: {
+                    latitude: destinationla,
+                    longitude: destinationlo
+                },
+                modes: ['foot', 'bike', 'car'],
+                units: 'metric'
+            }, (err, res) => {
+                console.log(res);
+                document.getElementById('foot').innerHTML =
+                `On foot, you would walk about ${res.routes.foot.distance.value/1000} km.
+                 It would take you ${
+                    res.routes.foot.duration.value > 0 ? res.routes.foot.duration.text : "no time at all!"
+                 }`;
+                document.getElementById('bike').innerHTML =
+                `On a bike, you would ride about ${res.routes.bike.distance.value/1000} km.
+                 It would take you ${
+                    res.routes.bike.duration.value > 0 ? res.routes.bike.duration.text : "no time at all!"
+                 }`;
+                document.getElementById('car').innerHTML =
+                `In a car, you would drive about ${res.routes.car.distance.value/1000} km.
+                 It would take you ${
+                    res.routes.car.duration.value > 0 ? res.routes.car.duration.text : "no time at all!"
+                 }`;
+            });
+        });
+    }
+
 block content
-    h1 Directions to #{userid}'s address
+    h1 Transport to #{userid}'s address
+    h2 Approximate address
+    p#address Loading...
+    h2 Distances
+    p#foot Loading...
+    p#bike
+    p#car
