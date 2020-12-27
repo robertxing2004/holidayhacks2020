@@ -7,9 +7,9 @@ block content
   link(rel='stylesheet', href='/stylesheets/dashboard-override.css')
   h1= 'My Dashboard'
   if name
-    h2= 'Welcome back, ' + name + '. You have ' + points + ' points.'
+    h2= 'Welcome back, ' + name + '! You have ' + points + ' points.'
   else
-    h2= 'Welcome back, ' + id + '. You have ' + points + ' points.'
+    h2= 'Welcome back, ' + id + '! You have ' + points + ' points.'
   p This is where you keep track of your requests and submissions
   div
     a#requestLink(class='button', href='/users/request') Request a Gift
@@ -17,13 +17,14 @@ block content
   
   if confirms.length > 0
     h1= 'Confirm Gifts'
-    p Confirm if you've accepted the following gifts
+    p Tell us if you've accepted the following gifts
     table#confirmTable
       thead
         tr
           th From
           th Description
           th Max Price
+          th
           th
       tbody
         each cnf in confirms
@@ -32,6 +33,7 @@ block content
             td= cnf.description
             td= cnf.maxCost
             td(onclick="confirmSubmission(" + true + ",'" + cnf.request_id + "')" class="clickable") Confirm
+            td(onclick="confirmSubmission(" + false + ",'" + cnf.request_id + "')" class="clickable") Delete
 
   if submissions.length > 0
     h1= 'My Gift Submissions'

@@ -47,11 +47,12 @@ table th {
   color: #2c516b;
 }
 
-.exists {
-  background-color: #1b3242;
-}
-
-.clickable:hover {
+table tr:hover {
   background-color: #335f7e;
   cursor: pointer;
+}
+
+.exists {
+  background-color: #1b3242;
+  cursor: normal;
 }

@@ -1,5 +1,6 @@
 div input[type="text"] {
   width: 100%;
+  display: block;
   background-color: #2c516b;
   color: #e8f5ff;
   font-family: 'Work Sans', sans-serif;
