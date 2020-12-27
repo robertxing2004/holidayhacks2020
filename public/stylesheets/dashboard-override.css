@@ -47,7 +47,7 @@ table th {
   color: #2c516b;
 }
 
-table tr:hover {
+.clickable:hover {
   background-color: #335f7e;
   cursor: pointer;
 }
