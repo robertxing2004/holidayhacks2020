@@ -83,6 +83,19 @@ async function deleteRequest(mongoId) { //delete own gift request and all submis
     location.reload();
 }
 
-async function getAddress() { //get an address from an id (assumes a geofence exists)
-
+async function getLocation(userid) { //get coordinates from an id (assumes a geofence exists)
+    console.log(userid);
+    let res = await fetch(
+        '/getlocation',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({userid: userid})
+        }
+    );
+    res = await res.json();
+    coords = res.coords;
+    //do something with coords
 }

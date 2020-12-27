@@ -31,6 +31,23 @@ function createGeofence(id, description, coordinates) {
     });
 }
 
+// Get coordinates from geofence of user
+async function getGeofenceCoords(id, httpres) {
+    axios.get(
+        `https://api.radar.io/v1/geofences/users/${id}`,
+        {headers: {Authorization: `${properties.radarSecret}`}}
+    ).
+    then(res => {
+        console.log(res.data.geofence.geometryCenter.coordinates);
+        httpres.send({coords: JSON.stringify(res.data.geofence.geometryCenter.coordinates)});
+    }).
+    catch(err => {
+        console.log(err);
+        httpres.send({message: error});
+    });
+}
+
 module.exports = {
-    createGeofence: createGeofence
+    createGeofence: createGeofence,
+    getGeofenceCoords: getGeofenceCoords
 };

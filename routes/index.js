@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 var database = require('../database');
+var radar = require('../radar');
 
 // Home page
 router.get('/', function(req, res, next) {
@@ -30,7 +31,7 @@ router.get('/leaderboard', async function(req, res, next) {
 //
 //
 //
-// API urls, not meant to be accessed by user
+// API urls, not meant to be used by user
 //
 //
 //
@@ -134,6 +135,17 @@ router.post('/deleterequest', async function(req, res, next) {
       id: req.session.userid
     });
     res.send({message: "Request deleted!"})
+  }
+});
+
+// get location of geofence
+router.post('/getlocation', async function(req, res, next) {
+  if (!req.session.userid || !req.body.userid) res.send({message: "Error"});
+  else {
+    console.log("\n\n\n*******\ngetting location");
+    console.log(req.body.userid);
+    
+    radar.getGeofenceCoords(req.body.userid, res);
   }
 });
 

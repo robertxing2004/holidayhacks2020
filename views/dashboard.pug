@@ -48,7 +48,7 @@ block content
             td= sub.requestid
             td= sub.description
             td= sub.maxCost
-            td(onclick="getAddress('" + sub.requestid + "')" class="clickable") Get Address
+            td(onclick="getLocation('" + sub.requestid + "')" class="clickable") Get Address
             td(onclick="deleteSubmission('" + sub.request_id + "')" class="clickable") Delete
     
   if requests.length > 0
