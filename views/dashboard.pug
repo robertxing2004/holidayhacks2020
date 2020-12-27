@@ -6,60 +6,59 @@ block scripts
 block content
   link(rel='stylesheet', href='/stylesheets/dashboard-override.css')
   h1= 'My Dashboard'
-  p This is where you can keep track of your requests and submissions
+  h2= 'Welcome back, ' + name + '. You have ' + points + ' points.'
+  p This is where you keep track of your requests and submissions
   div
     a#requestLink(class='button', href='/users/request') Request a Gift
     a#submitLink(class='button button2', href='/users/createsubmit') Give a Gift
   
-  h2= 'Confirm Gifts'
-  p Tell us if you've received the following gifts
-  table#confirmTable
-    thead
-      tr
-        th From:
-        th Gift Description
-        th Max Price
-    tbody
-      each cnf in confirms
+  if confirms.length > 0
+    h1= 'Confirm Gifts'
+    p Tell us if you've accepted the following gifts
+    table#confirmTable
+      thead
         tr
-          - var mongoId = cnf._id;
-          td= cnf.id
-          td= cnf.description
-          td= cnf.maxCost
-          td
-            button(onclick="confirmsubmission(" + true + ",'" + mongoId + "')") Yes
-            button(onclick="confirmsubmission(" + false + ",'" + mongoId + "')") No
+          th From
+          th Description
+          th Max Price
+      tbody
+        each cnf in confirms
+          tr
+            td= cnf.id
+            td= cnf.description
+            td= cnf.maxCost
+            td(onclick="confirmsubmission(" + true + ",'" + cnf._id + "')") Yes
+            td(onclick="confirmsubmission(" + false + ",'" + cnf._id + "')") No
 
-  h2= 'My Gift Submissions'
-  p Edit your gift submissions
-  //-
+  if submissions.length > 0
+    h1= 'My Gift Submissions'
+    p Edit your gift submissions, or see the address you need to deliver to
     table#submissionTable
       thead
         tr
-          th Username
-          th Gift Description
+          th To
+          th Description
+          th Get address
           th Max Price
       tbody
         each sub in submissions
           tr
-            - var mongoId = req._id;
-            td(onclick="addsubmission('" + mongoId + "')")= req.id
-            td(onclick="addsubmission('" + mongoId + "')")= req.description
-            td(onclick="addsubmission('" + mongoId + "')")= req.maxCost
+            td= sub.requestid
+            td= sub.description
+            td(onclick="getAddress('" + sub.requestid + "')") @
+            td(onclick="deletesubmission('" + sub._id + "')")= sub.maxCost
     
-  h2= 'My Gift Requests'
-  p Edit your gift requests
-  //-
+  if requests.length > 0
+    h1= 'My Gift Requests'
+    p Edit the gift requests you've made
     table#requestTable
       thead
         tr
-          th Username
-          th Gift Description
+          th Description
           th Max Price
       tbody
         each req in requests
           tr
-            - var mongoId = req._id;
-            td(onclick="addsubmission('" + mongoId + "')")= req.id
-            td(onclick="addsubmission('" + mongoId + "')")= req.description
-            td(onclick="addsubmission('" + mongoId + "')")= req.maxCost
+            td= req.description
+            td= req.maxCost
+            td(onclick="deleterequest('" + req._id + "')")

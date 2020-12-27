@@ -10,9 +10,6 @@ var properties = require('./properties');
 
 var app = express();
 
-var users = app.locals.users;
-var requests = app.locals.requests;
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

@@ -11,8 +11,14 @@ router.get('/', async function(req, res, next) {
   if (!req.session.userid) res.redirect('/users/login');
   else {
     let confirms = [];
+    let submissions = [];
+    let requests = [];
+    
+    let userid = req.session.userid
+    let user;
+
     try {
-      let res = await database.submissions.find({requestid: req.session.userid}).exec();
+      let res = await database.submissions.find({requestid: userid}).exec();
       for (conf of res) {
         console.log(conf);
         confirms.push(conf);
@@ -22,9 +28,41 @@ router.get('/', async function(req, res, next) {
       console.log(err);
     }
 
+    try {
+      let res = await database.submissions.find({id: userid}).exec();
+      for (sub of res) {
+        console.log(sub);
+        submissions.push(sub);
+      }
+    }
+    catch(err) {
+      console.log(err);
+    }
+
+    try {
+      let res = await database.requests.find({id: userid}).exec();
+      for (req of res) {
+        console.log(req);
+        requests.push(req);
+      }
+    }
+    catch(err) {
+      console.log(err);
+    }
+
+    try{
+      user = await database.users.findOne({id: userid}).exec();
+    }
+    catch(err) {
+      console.log(err);
+    }
+
     res.render('dashboard', {
-      id: req.session.userid,
-      confirms: confirms
+      name: user.username,
+      points: user.points,
+      confirms: confirms,
+      submissions: submissions,
+      requests: requests
     });
   }
 });

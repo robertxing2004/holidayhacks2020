@@ -6,17 +6,23 @@ block scripts
 block content
   link(rel='stylesheet', href='/stylesheets/submit-override.css')
   h1= "Gift Submissions"
-  h2= 'Find gift requests near you'
-  table#submissionTable
-    thead
-      tr
-        th Name
-        th Gift Description
-        th Max Price
-    tbody
-      each req in requests
+  if requests.length > 0
+    h2= 'Find gift requests near you'
+    p.
+      Click on a gift request to indicate you want to give that gift!
+      You will get delivery instructions on your dashboard.
+    table#submissionTable
+      thead
         tr
-          - var mongoId = req._id;
-          td(onclick="addsubmission('" + mongoId + "')")= req.id
-          td(onclick="addsubmission('" + mongoId + "')")= req.description
-          td(onclick="addsubmission('" + mongoId + "')")= req.maxCost
+          th Name
+          th Gift Description
+          th Max Price
+      tbody
+        each req in requests
+          tr
+            - var mongoId = req._id;
+            td(onclick="addsubmission('" + mongoId + "')")= req.id
+            td(onclick="addsubmission('" + mongoId + "')")= req.description
+            td(onclick="addsubmission('" + mongoId + "')")= req.maxCost
+  else
+    h2= "There aren't any gift requests right now..."
