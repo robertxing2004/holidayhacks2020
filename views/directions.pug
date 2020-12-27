@@ -39,19 +39,18 @@ block scripts
             }, (err, res) => {
                 console.log(res);
                 document.getElementById('distance').innerHTML =
-                `The distance is ${res.routes.bike.distance.value/1000} km.
-                 `;
+                `The distance is about ${res.routes.bike.distance.value/1000} km.`;
                 document.getElementById('foot').innerHTML =
                 `On foot, it would take you ${
-                    res.routes.foot.duration.value > 0 ? res.routes.foot.duration.text : "no time at all!"
+                    res.routes.foot.duration.text != "" ? res.routes.foot.duration.text : "no time at all!"
                  }`;
                 document.getElementById('bike').innerHTML =
                 `On a bike, it would take you ${
-                    res.routes.bike.duration.value > 0 ? res.routes.bike.duration.text : "no time at all!"
+                    res.routes.bike.duration.value != "" ? res.routes.bike.duration.text : "no time at all!"
                  }`;
                 document.getElementById('car').innerHTML =
                 `In a car, it would take you ${
-                    res.routes.car.duration.value > 0 ? res.routes.car.duration.text : "no time at all!"
+                    res.routes.car.duration.value != "" ? res.routes.car.duration.text : "no time at all!"
                  }`;
             });
         });
