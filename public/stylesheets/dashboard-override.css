@@ -20,3 +20,34 @@ div a:hover {
   background-color: #f1f9ff;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
+
+h2 {
+  font-weight: normal;
+}
+
+table {
+  font-weight: normal;
+  width: 100%;
+  margin-bottom: 50px;
+  border-collapse: collapse;
+}
+
+table, td, th {
+  border: 3px solid #e8f5ff;
+  padding: 10px;
+  text-align: left;
+  transition-duration: 0.4s;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #e8f5ff;
+  cursor: auto;
+  color: #2c516b;
+}
+
+table tr:hover {
+  background-color: #335f7e;
+  cursor: pointer;
+}
