@@ -89,9 +89,9 @@ router.post('/confirmsubmission', async function(req, res, next) {
       console.log(receiverid);
       console.log(req.body.confirmed);
       
-      await database.submissions.findOneAndDelete({
+      await database.submissions.deleteOne({
         request_id: mongoose.Types.ObjectId(req.body.mongoId),
-        id: req.session.userid
+        requestid: req.session.userid
       });
       if (req.body.confirmed) {
         await database.requests.findByIdAndDelete(mongoose.Types.ObjectId(req.body.mongoId));
