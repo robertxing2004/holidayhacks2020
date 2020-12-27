@@ -37,6 +37,10 @@ block scripts
                 modes: ['foot', 'bike', 'car'],
                 units: 'metric'
             }, (err, res) => {
+                if (err) {
+                    document.getElementById('distance').innerHTML = 'This location is too far to travel to!';
+                    return;
+                }
                 console.log(res);
                 document.getElementById('distance').innerHTML =
                 `The distance is about ${res.routes.bike.distance.value/1000} km.`;
