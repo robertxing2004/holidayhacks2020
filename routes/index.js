@@ -113,12 +113,27 @@ router.post('/deletesubmission', async function(req, res, next) {
     console.log("\n\n\n*******\ndeleting submission");
     console.log(req.body.mongoId);
     
-    await database.submissions.findOneAndDelete({
+    await database.submissions.deleteOne({
       request_id: mongoose.Types.ObjectId(req.body.mongoId),
       id: req.session.userid
     });
-    console.log("yes?");
     res.send({message: "Submission deleted!"})
+  }
+});
+
+// delete request
+router.post('/deleterequest', async function(req, res, next) {
+  if (!req.session.userid || !req.body.mongoId) res.send({message: "Error"});
+  else {
+    console.log("\n\n\n*******\ndeleting request");
+    console.log(req.body.mongoId);
+    
+    await database.requests.findByIdAndDelete(mongoose.Types.ObjectId(req.body.mongoId));
+    await database.submissions.deleteMany({
+      request_id: mongoose.Types.ObjectId(req.body.mongoId),
+      id: req.session.userid
+    });
+    res.send({message: "Request deleted!"})
   }
 });
 
